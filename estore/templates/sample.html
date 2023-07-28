@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Store</title>
+</head>
+<body>
+    <h1>Welcome to the Store</h1>
+    {% if user %}
+        <p>User ID: {{ user }}</p>
+    {% else %}
+        <p>User is not logged in.</p>
+    {% endif %}
+
+    <h2>Category: {{ category }}</h2>
+    <ul>
+        {% for product in products %}
+            <li>{{ product }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

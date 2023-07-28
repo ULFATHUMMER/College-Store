@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+  {% if category %}
+        {{category.description|truncatewords:155}}
+  {% else %}
+        Welcome to eshop.Purchase is your choice...
+  {% endif %}
+{% endblock %}
+
+{% block title %}
+  {% if category %}
+        {{category.name}} - Eshop
+  {% else %}
+        See our new collecions - Eshop
+  {% endif %}
+{% endblock %}
+{% block content %}
+
+<div xmlns:cheked="http://www.w3.org/1999/xhtml">
+    <div class="row my_row_class">
+        <div class="mx_auto">
+
+
+            <div class="home">
+                <img class="my_image my_image_padding" src="{% static 'img/banner3.jpg'%}" alt="our products" width="1110" ></div>
+            </div>
+            <div class="home">
+               <div class="mx_auto justify-content-center" style="margin-top:-300px;">
+                    <h1 class="text-center home-header" style="color:#eeff1b"><b>Complete your profile</b></h1>
+                    <a class="btn btn-primary btn-lg " href="{% url 'homeapp:profile' user %}" style="margin-left: 500px;">Profile - {{user}}</a>
+
+               </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<div class="condainer">
+    <form action="{% url 'cartapp:add_cart'  %}" method="post">
+        {% csrf_token %}
+    <div class="row justify-content-center">
+      {% for product in products.object_list %}
+
+        <div class="col-md-3">
+            <div class="wrap w-100">
+                <div class="card">
+
+                    <div class="card-body" style="height:110px;">
+                        <div class="row">
+                            <div class="col-md-6" style="margin-top:-10px;">
+                                {% if product.image %}
+                                <img class="card-img-top " src="{{product.image.url}}" alt="{{product.name}}" style="height:100px;width:100px;">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4">
+                                <p class="card-text"><b>{{product.name}}</b></p><p>${{product.price}}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="{{product.id}}" name="products"  value="{{product.id}}" >
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br>
+    <div class="row justify-content-center">
+        <div class="d-flex justify-content mx-4 mb-3 mb-lg-4" style="padding-left: 500px">
+            <button type="submit" class="btn btn-primary btn-lg" >Buy now</button>
+
+        </div>
+    </div>
+    </form>
+    <br>
+    <br>
+</div>
+
+
+</div>
+
+{% endblock %}

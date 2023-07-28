@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+  {% if category %}
+        {{category.description|truncatewords:155}}
+  {% else %}
+        Welcome to eshop.Purchase is your choice...
+  {% endif %}
+{% endblock %}
+
+{% block title %}
+  {% if category %}
+        {{category.name}} - Eshop
+  {% else %}
+        See our new collecions - Eshop
+  {% endif %}
+{% endblock %}
+{% block content %}
+  {% if category %}
+    <div>
+      <div class="row my_row_class">
+        <div class="mx_auto">
+          <p><a href="{% url 'homeapp:allProdCat' %}">our collection</a></p>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+    <div class="mx_auto">
+      {% if category %}
+        <img class="my_image" src="{{category.image.url}}" alt="{{category.name}}">
+  </div>
+  <br>
+  <div>
+      <h1 class="text-center my_title">{{category.name}}</h1>
+      <p class="text-justify">{{category.description}}</p>
+  </div>
+      {% else %}
+  <div>
+        <img class="my_image my_image_padding" src="{% static 'img/banner3.jpg'%}" alt="our products" width="1110" ></div>
+  </div>
+  <br>
+<div>
+  <h1 class="text-center my-title">our product collections</h1>
+  <p class="text-justify">The designs in the template store have demo content that highlights Squarespace features and layout possibilities. Our design team carefully curates the text and images to inspire you and serve as a springboard for your own ideas. You can create any type of site, no matter what design you choose as your starting point.</p>
+</div>
+      {% endif %}
+
+<div class="condainer">
+
+<form method="post" action="">
+    <div class="row justify-content-center">
+      {% for product in products.object_list %}
+        <div class="col-md-3">
+            <div class="wrap w-100">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% if product.image %}
+                                <img class="card-img-top my_image" src="{{product.image.url}}" alt="{{product.name}}" style="height:95px;width:100px;">
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4">
+                                <p class="card-text"><b>{{product.name}}</b></p><p>${{product.price}}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="{{product.id}}"  value="{{product.id}}" >
+                            </div>
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    </form>
+    <!-----paginator------->
+    <div class="mx_auto">
+       {% if products.paginator.num_pages > 1 %}
+      <hr/>
+      <div class="text-center">
+        {% for pg in products.paginator.page_range %}
+        <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+        {% endfor %}
+      </div>
+
+      {% endif %}
+    </div>
+    <br>
+
+    <!-------bill---------->
+
+
+
+
+
+</div>
+
+{% endblock %}

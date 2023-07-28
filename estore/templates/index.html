@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+  {% if category %}
+        {{category.description|truncatewords:155}}
+  {% else %}
+        Welcome to eshop.Purchase is your choice...
+  {% endif %}
+{% endblock %}
+
+{% block title %}
+  {% if category %}
+        {{category.name}} - Eshop
+  {% else %}
+        See our new collecions - Eshop
+  {% endif %}
+{% endblock %}
+{% block content %}
+<div>
+      <div class="row my_row_class">
+        <div class="mx_auto">
+          <div class="home">
+            <img class="my_image my_image_padding" src="{% static 'img/banner.jpg'%}" alt="our products" width="1110" ></div>
+            </div>
+        </div>
+      </div>
+
+      <div class="home">
+          <div class="mx_auto justify-content-center" style="margin-top:-300px;">
+              <h1 class="text-center home-header" style="color:#f2f2f2"><b>Purchase is your choice.</b></h1>
+              <a class="btn btn-success btn-lg " href="{% url 'homeapp:login' %}" style="margin-left: 500px;">Login</a>
+          </div>
+
+      </div>
+
+
+</div>
+
+{% endblock %}

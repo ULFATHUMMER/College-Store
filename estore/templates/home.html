@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+  {% if category %}
+        {{category.description|truncatewords:155}}
+  {% else %}
+        Welcome to eshop.Purchase is your choice...
+  {% endif %}
+{% endblock %}
+
+{% block title %}
+  {% if category %}
+        {{category.name}} - Ecart
+  {% else %}
+        See our new collecions - Ecart
+  {% endif %}
+{% endblock %}
+{% block content %}
+
+
+<!---form--->
+
+<section class="vh-100" style="background-color: #eee;" xmlns="http://www.w3.org/1999/html">
+  <div class="container h-100 my_image my_image_padding" style="background-image:url(static/img/banner1.jpg)">
+    <div class="row d-flex justify-content-center align-items-center h-100" style="height:500px !important;">
+      <div class="col-lg-12 col-xl-11" style="padding-right:50px;">
+        <div class="card text-black" style="border-radius: 25px;">
+
+          <p class="card-title text-center h3 fw-bold mb-5 mx-1 mx-md-4 mt-4">Pleace fill this form.</p>
+
+
+
+            <form action="{%url  'homeapp:allProdCat' %}" method="post" class="mx-1 mx-md-4">
+              {% csrf_token %}
+            <div class="card-body p-md-5" style="padding:25px !important;">
+
+            <div class="row justify-content-center">
+              <!---col1--->
+              <div class="col-md-10 col-lg-4 col-xl-3 order-2 order-lg-1">
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" >Name</label>
+                      <input type="text"  name="name" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" >DOB</label>
+                      <input type="date"  name="dob" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" >Age</label>
+                      <input type="number"  name="age" class="form-control" />
+                    </div>
+                  </div>
+              </div>
+              <!--col 2--->
+              <div class="col-md-10 col-lg-4 col-xl-3 order-2 order-lg-1">
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0" style="height:59px;">
+                      <label class="form-label" >Gender</label>
+                      <div class="form-check d-flex justify-content-left mb-5">
+                        <input class="form-check-input me-2 checkbox-inline col-sm-2 " type="checkbox" name="gender" value="male" />
+                        <label class="form-check-label" >Male</label>
+                        <input class="form-check-input me-2 checkbox-inline col-sm-2" style="margin-left:50px;" type="checkbox" name="gender"  value="female" />
+                        <label class="form-check-label" >Female</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" >Phone number</label>
+                      <input type="number"  name="phonenumber" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" >Email id</label>
+                      <input type="email"  name="email" class="form-control" />
+                    </div>
+                  </div>
+              </div>
+              <!---col3-->
+              <div class="col-md-10 col-lg-4 col-xl-3 order-2 order-lg-1">
+                  <div class="d-flex flex-row align-items-center mb-4">
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" >Address</label>
+                        <input type="text"  name="add01" class="form-control" />
+                      </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" >Department</label>
+                        <select class="form-select form-control" >
+                            <option selected>Select department</option>
+                            <option value="cs">Computer sceince</option>
+                            <option value="Place order">Commerse</option>
+                            <option value="Return">Life sceince</option>
+                        </select>
+                        <!--div class="dropdown">
+                            <button class="btn form-control dropdown-toggle" type="button" data-mdb-toggle="dropdown" aria-expanded="false">Select department</button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="#">Computer sceince &raquo;</a>
+                                    <ul class="dropdown-menu dropdown-submenu">
+                                        <li><a class="dropdown-item" href="#">course 1</a></li>
+                                        <li><a class="dropdown-item" href="#">course 2</a></li>
+                                        <li><a class="dropdown-item" href="#">course 3</a></li>
+                                        <li><a class="dropdown-item" href="#">course 4</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="dropdown-item" href="#">Commerse &raquo;</a>
+                                    <ul class="dropdown-menu dropdown-submenu">
+                                        <li><a class="dropdown-item" href="#">Course 1</a></li>
+                                        <li><a class="dropdown-item" href="#">Course 2</a></li>
+                                        <li><a class="dropdown-item" href="#">Course 3  </a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="dropdown-item" href="#">Life sceince &raquo;</a>
+                                    <ul class="dropdown-menu dropdown-submenu">
+                                        <li><a class="dropdown-item" href="#">Physics</a></li>
+                                        <li><a class="dropdown-item" href="#">Chemistry</a></li>
+                                        <li><a class="dropdown-item" href="#">Botony</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div-->
+                    </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" >Purpose</label>
+                        <select class="form-select form-control " >
+                            <option selected>Select purpose</option>
+                            <option value="Enquiry">Enquiry</option>
+                            <option value="Place order">Place order</option>
+                            <option value="Return">Return</option>
+                        </select>
+                    </div>
+                  </div>
+
+              </div>
+            </div>
+            </div>
+                <div class="d-flex justify-content mx-4 mb-3 mb-lg-4 float-left">
+                    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                </div>
+
+
+            </form>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+  </div>
+</section>
+
+
+
+
+{% endblock %}
